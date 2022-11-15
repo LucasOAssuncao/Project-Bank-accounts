@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "es2016",
     "module": "commonjs",
+    "outDir": "./build",
     "rootDir": "./src",
     "baseUrl": ".",
     "esModuleInterop": true,
@@ -13,4 +14,5 @@
     }
   },
   "include": ["src/**/*"],
+  "exclude": ["src/tests"]
 }

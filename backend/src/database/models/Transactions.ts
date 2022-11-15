@@ -7,7 +7,6 @@ class Transactions extends Model {
   debitedAccountId!: number;
   creditedAccountId!: number;
   value!: number;
-  createdAt: Date;
 }
 
 Transactions.init({
@@ -36,7 +35,8 @@ Transactions.init({
   sequelize: db,
   modelName: 'transactions',
   underscored: true,
-  timestamps: false,
+  timestamps: true,
+  updatedAt: false,
 });
 
 export default Transactions;
