@@ -1,4 +1,4 @@
-import * as express from 'express';
+import express from 'express';
 
 class App {
     public app: express.Express;
@@ -28,4 +28,4 @@ class App {
     }
   }
   
-  export { App };
+  export default App;
