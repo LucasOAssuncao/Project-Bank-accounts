@@ -1,6 +1,6 @@
 import { INTEGER, STRING, Model, DATE } from 'sequelize';
 import db from '.';
-import Users from './Users';
+import Accounts from './Accounts';
 
 class Transactions extends Model {
   id!: number;
@@ -34,9 +34,16 @@ Transactions.init({
 }, {
   sequelize: db,
   modelName: 'transactions',
-  underscored: true,
+  underscored: false,
   timestamps: true,
   updatedAt: false,
 });
+
+Accounts.belongsTo(Transactions, { foreignKey: 'debitedAccountId', as: 'idDebited' });
+Accounts.belongsTo(Transactions, { foreignKey: 'creditedAccountId', as: 'idCredited' });
+
+
+Transactions.hasMany(Transactions, { foreignKey: 'debitedAccountId', as: 'debitedAccountId' });
+Transactions.hasMany(Transactions, { foreignKey: 'creditedAccountId', as: 'creditedAccountId' });
 
 export default Transactions;

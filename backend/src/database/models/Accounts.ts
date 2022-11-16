@@ -1,7 +1,6 @@
-import { INTEGER, STRING, Model } from 'sequelize';
+import { INTEGER, Model, DECIMAL } from 'sequelize';
 import db from '.';
 import Transactions from './Transactions';
-import Users from './Users';
 
 class Accounts extends Model {
   id!: number;
@@ -16,22 +15,14 @@ Accounts.init({
     autoIncrement: true,
   },
   balance: {
-    type: INTEGER,
+    type: DECIMAL,
     allowNull: false,
   },
 }, {
   sequelize: db,
-  modelName: 'users',
-  underscored: true,
+  modelName: 'accounts',
+  underscored: false,
   timestamps: false,
 });
-
-Accounts.belongsTo(Users, { foreignKey: 'id', as: 'accountId' });
-Accounts.belongsToMany(Transactions, { foreignKey: 'id', as: 'debitedAccountId', through: 'transactions' });
-Accounts.belongsToMany(Transactions, { foreignKey: 'id', as: 'creditedAccountId', through: 'transactions' });
-
-Users.hasOne(Accounts, { foreignKey: 'id', as: 'accountId' });
-Transactions.hasMany(Transactions, { foreignKey: 'id', as: 'debitedAccountId' });
-Transactions.hasMany(Transactions, { foreignKey: 'id', as: 'creditedAccountId' });
 
 export default Accounts;

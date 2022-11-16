@@ -1,4 +1,5 @@
 import express from 'express';
+import signup from './routes/signup';
 
 class App {
     public app: express.Express;
@@ -7,6 +8,7 @@ class App {
       this.app = express();
   
       this.config();
+      this.app.use(signup)
   
       this.app.get('/', (req, res) => res.json({ ok: true }));
     }
