@@ -1,5 +1,6 @@
 import express from 'express';
 import signup from './routes/signup';
+import login from './routes/login';
 
 class App {
     public app: express.Express;
@@ -9,7 +10,7 @@ class App {
   
       this.config();
       this.app.use(signup)
-  
+      this.app.use(login)
       this.app.get('/', (req, res) => res.json({ ok: true }));
     }
   

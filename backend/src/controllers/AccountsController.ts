@@ -3,7 +3,7 @@ import AccountsService from '../services/AccountsService';
 import UsersService from '../services/UsersService';
 const bcrypt = require('bcrypt');
 
-export default class UserController {
+export default class AccountsController {
   constructor(
     private accountsService = new AccountsService(),
     private usersService = new UsersService()

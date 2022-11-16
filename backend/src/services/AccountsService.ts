@@ -1,3 +1,4 @@
+import { IJWT } from '../interfaces/IJwt';
 import Accounts from '../database/models/Accounts';
 
 export default class AccountsService {
@@ -7,5 +8,12 @@ export default class AccountsService {
     } = await Accounts.create({ balance: 100.0 });
 
     return id;
+  };
+
+  getBalance = async (id: number) => {
+    
+    const accountInfo = await Accounts.findOne({ where: { id } });
+    
+    return accountInfo?.dataValues.balance;
   };
 }

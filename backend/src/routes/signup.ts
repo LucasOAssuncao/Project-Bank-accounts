@@ -1,10 +1,10 @@
 import { Router } from 'express';
-import AccountController from '../controllers/AccountController';
+import AccountsController from '../controllers/AccountsController';
 import verifyCredentials from '../middlewares/verifyCredentials';
 
 const route = Router();
-const accountController = new AccountController();
+const accountsController = new AccountsController();
 
-route.post('/signup',verifyCredentials ,accountController.signup);
+route.post('/signup',verifyCredentials ,accountsController.signup);
 
 export default route;
