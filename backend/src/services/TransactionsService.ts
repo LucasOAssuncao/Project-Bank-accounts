@@ -33,8 +33,6 @@ export default class TransactionsService {
 
       return transactions;
     }
-
-    console.log(' AODSHAOSDHAOS ',key);
     
     const transactions = await Transactions.findAll({
       where: { [key]: id },

@@ -19,7 +19,6 @@ const verifyAccount = async (
   }
 
   const isPasswordValid = await bcrypt.compare(password, user?.password);
-  console.log(isPasswordValid);
   
   if(!isPasswordValid) {
     return res.status(400).json({ message: 'Wrong Password' });
