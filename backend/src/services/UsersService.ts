@@ -2,7 +2,7 @@ import Users from '../database/models/Users';
 import decodeToken from '../utils/decodeToken';
 
 export default class UsersService {
-  findByUserName = async (userName: string): Promise<Users | null> => {
+  findByUserName = async (userName: string): Promise<Users> => {
     const user = await Users.findOne({ where: { userName } });
 
       return user?.dataValues;

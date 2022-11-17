@@ -39,11 +39,11 @@ Transactions.init({
   updatedAt: false,
 });
 
-Accounts.belongsTo(Transactions, { foreignKey: 'debitedAccountId', as: 'idDebited' });
-Accounts.belongsTo(Transactions, { foreignKey: 'creditedAccountId', as: 'idCredited' });
+Transactions.belongsToMany(Accounts, { foreignKey: 'debitedAccountId', as: 'idDebited', through: "Accounts" });
+Transactions.belongsToMany(Accounts, { foreignKey: 'creditedAccountId', as: 'idCredited', through: "Accounts" });
 
 
-Transactions.hasMany(Transactions, { foreignKey: 'debitedAccountId', as: 'debitedAccountId' });
-Transactions.hasMany(Transactions, { foreignKey: 'creditedAccountId', as: 'creditedAccountId' });
+Accounts.hasOne(Transactions, { foreignKey: 'debitedAccountId', as: 'debitedId' });
+Accounts.hasOne(Transactions, { foreignKey: 'creditedAccountId', as: 'creditedId' });
 
 export default Transactions;

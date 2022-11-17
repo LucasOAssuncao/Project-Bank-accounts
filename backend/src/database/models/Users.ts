@@ -40,6 +40,6 @@ Users.init(
 
 Users.belongsTo(Accounts, { foreignKey: 'accountId', as: 'idOfAccount' });
 
-Accounts.hasMany(Users, { foreignKey: 'accountId', as: 'idAccount' });
+Accounts.hasOne(Users, { foreignKey: 'accountId', as: 'idAccount' });
 
 export default Users;

@@ -10,10 +10,10 @@ export default class AccountsService {
     return id;
   };
 
-  getBalance = async (id: number) => {
+  getAccountInfo = async (id: number) => {
     
     const accountInfo = await Accounts.findOne({ where: { id } });
     
-    return accountInfo?.dataValues.balance;
+    return accountInfo?.dataValues;
   };
 }
