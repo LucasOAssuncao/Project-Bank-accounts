@@ -1,4 +1,4 @@
-import { INTEGER, STRING, Model, DATE } from 'sequelize';
+import { INTEGER, STRING, Model, DATEONLY } from 'sequelize';
 import db from '.';
 import Accounts from './Accounts';
 
@@ -29,7 +29,7 @@ Transactions.init({
     allowNull: false,
   },
   createdAt: {
-    type: DATE,
+    type: DATEONLY,
   },
 }, {
   sequelize: db,

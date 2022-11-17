@@ -3,7 +3,7 @@ import UsersService from '../services/UsersService';
 
 const usersService = new UsersService();
 
-const verifyAccount = async (
+const verifyInfoForTransaction = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -21,4 +21,4 @@ const verifyAccount = async (
   next();
 };
 
-export default verifyAccount;
+export default verifyInfoForTransaction;

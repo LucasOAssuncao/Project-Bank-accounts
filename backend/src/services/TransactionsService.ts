@@ -1,14 +1,43 @@
 import Transactions from '../database/models/Transactions';
 import Accounts from '../database/models/Accounts';
-import { Op } from 'sequelize';
+import { Op, Sequelize } from 'sequelize';
+const config = require('../database/config/database');
+
+const sequelize = new Sequelize(config);
 
 export default class TransactionsService {
-  findTransactionById = async (id: number): Promise<Transactions[] | null> => {
+  findAllTransactionsById = async (
+    id: number,
+    key?: string
+  ): Promise<Transactions[] | null> => {
     const transactions = await Transactions.findAll({
       where: {
-        [Op.or]: [{ debitedAccountId: id }, { creditedAccountId: id }],
+        [Op.and]: [{ debitedAccountId: id }, { creditedAccountId: id }],
         exclude: ['id'],
       },
+    });
+
+    return transactions;
+  };
+
+  findAllFilteredTransactions = async (
+    id: number,
+    key: any,
+    date?: any
+  ): Promise<Transactions[] | null> => {
+    
+    if (date) {
+      const transactions = await Transactions.findAll({
+        where: { createdAt: date },
+      });
+
+      return transactions;
+    }
+
+    console.log(' AODSHAOSDHAOS ',key);
+    
+    const transactions = await Transactions.findAll({
+      where: { [key]: id },
     });
 
     return transactions;
@@ -18,16 +47,31 @@ export default class TransactionsService {
     debitedAccountId: number,
     creditedAccountId: number,
     value: number,
-    balance: number
   ) => {
     const transaction = await Transactions.create({
       debitedAccountId,
       creditedAccountId,
       value,
     });
+    const t = await sequelize.transaction();
+    try {
+      await Accounts.decrement('balance', {
+        by: value,
+        where: { id: debitedAccountId },
+        transaction: t,
+      });
 
-    await Accounts.update({ balance }, { where: { accountId: debitedAccountId }});
-    
-    return transaction;
+      await Accounts.increment('balance', {
+        by: value,
+        where: { id: creditedAccountId },
+        transaction: t,
+      });
+
+      await t.commit();
+      return transaction;
+    } catch (e) {
+      await t.rollback();
+      throw e;
+    }
   };
 }

@@ -21,7 +21,7 @@ export default class UserController {
     const { accountId, userName } = this.usersService.decodedUserInfo(authorization);
 
     const { balance }  = await this.accountsService.getAccountInfo(accountId);
-    const transactions = await this.transactionsService.findTransactionById(accountId);
+    const transactions = await this.transactionsService.findAllTransactionsById(accountId);
     
     res.status(200).json({ userName, balance, transactions});
   };

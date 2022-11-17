@@ -2,6 +2,7 @@ import express from 'express';
 import signup from './routes/signup';
 import login from './routes/login';
 import transaction from './routes/transaction';
+import errorMiddleware from './middlewares/errorMiddleware';
 
 class App {
     public app: express.Express;
@@ -14,6 +15,7 @@ class App {
       this.app.use(login);
       this.app.use(transaction);
       this.app.get('/', (req, res) => res.json({ ok: true }));
+      this.app.use(errorMiddleware);
     }
   
     private config():void {

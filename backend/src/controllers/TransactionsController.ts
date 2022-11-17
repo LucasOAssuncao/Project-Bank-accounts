@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import AccountsService from '../services/AccountsService';
 import UsersService from '../services/UsersService';
 import TransactionsService from '../services/TransactionsService';
@@ -11,7 +11,7 @@ export default class UserController {
     private transactionsService = new TransactionsService()
   ) {}
 
-  public create = async (req: Request, res: Response) => {
+  create = async (req: Request, res: Response, next: NextFunction) => {
     const { authorization } = req.headers;
     const { receiver, value } = req.body;
 
@@ -19,22 +19,70 @@ export default class UserController {
       return res.status(401).json({ message: 'unauthorized' });
     }
 
-    const { accountId, userName } = this.usersService.decodedUserInfo(authorization);
-    const { balance }  = await this.accountsService.getAccountInfo(accountId);
-    
+    const { accountId, userName } =
+      this.usersService.decodedUserInfo(authorization);
+    const { balance } = await this.accountsService.getAccountInfo(accountId);
+
     if (receiver === userName) {
-      return res.status(401).json({ message: 'You cannot cash-out to yourself' });
+      return res
+        .status(401)
+        .json({ message: 'You cannot cash-out to yourself' });
     }
 
     if (value > balance) {
       return res.status(401).json({ message: 'Insufficient funds' });
     }
 
-    const newBalance = balance - value;
+    const { accountId: id } = await this.usersService.findByUserName(receiver);
+    try {
+      const transaction = await this.transactionsService.create(
+        accountId,
+        id,
+        value,
+      );
 
-    const { accountId: id} = await this.usersService.findByUserName(receiver);
-    const transaction = await this.transactionsService.create(accountId, id, value, newBalance);
+      res.status(200).json(transaction);
+    } catch (err) {
+      next(err);
+    }
+  };
 
-    res.status(200).json(transaction);
+  getInTransactions = async (req: Request, res: Response) => {
+    const { authorization } = req.headers;
+    const { date } = req.body;
+
+    if (!authorization) {
+      return res.status(401).json({ message: 'unauthorized' });
+    }
+
+    const { accountId } = this.usersService.decodedUserInfo(authorization);
+    const transactions =
+      await this.transactionsService.findAllFilteredTransactions(
+        accountId,
+        'creditedAccountId',
+        date
+      );
+
+    res.status(200).json(transactions);
+  };
+
+  getOutTransactions = async (req: Request, res: Response) => {
+    const { authorization } = req.headers;
+    const { date } = req.body;
+    
+    if (!authorization) {
+      return res.status(401).json({ message: 'unauthorized' });
+    }
+
+    const { accountId } = this.usersService.decodedUserInfo(authorization);
+    
+    const transactions =
+      await this.transactionsService.findAllFilteredTransactions(
+        accountId,
+        'debitedAccountId',
+        date
+      );
+
+    res.status(200).json(transactions);
   };
 }
