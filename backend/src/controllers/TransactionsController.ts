@@ -49,7 +49,7 @@ export default class UserController {
 
   getInTransactions = async (req: Request, res: Response) => {
     const { authorization } = req.headers;
-    const { date } = req.body;
+    const { date } = req.params;
 
     if (!authorization) {
       return res.status(401).json({ message: 'unauthorized' });
@@ -68,7 +68,7 @@ export default class UserController {
 
   getOutTransactions = async (req: Request, res: Response) => {
     const { authorization } = req.headers;
-    const { date } = req.body;
+    const { date } = req.params;
     
     if (!authorization) {
       return res.status(401).json({ message: 'unauthorized' });

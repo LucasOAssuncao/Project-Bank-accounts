@@ -12,8 +12,7 @@ export default class TransactionsService {
   ): Promise<Transactions[] | null> => {
     const transactions = await Transactions.findAll({
       where: {
-        [Op.and]: [{ debitedAccountId: id }, { creditedAccountId: id }],
-        exclude: ['id'],
+        [Op.or]: [{ debitedAccountId: id }, { creditedAccountId: id }],
       },
     });
 
