@@ -24,27 +24,19 @@ cd Project-NG
 #### With Docker:
 
 ```bash
-docker-compose up --build
-```
-
-#### Without Docker:
-
-```bash
-npm install
-```
-
-### Run server
-
-```bash
-cd backend/ 
-npm start
-```
-
-and
-
-```bash
-cd frontend/ 
-npm start
+docker-compose up --build -d
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## How to use
+
+###  You will need to click in "sign up" at home page.
+
+###  "username" will require at least 3 characters.
+
+###  "password" will require at least 8 characters, at least 1 uppercase, and 1 number.
+
+###  After you signed you will be redirected to /login, i recommend you to create another account for full test of the aplication.
+
+###  After login in one of your accounts created, you now can transfer "money" to another account registered in the database, and you can filter your in or out transactions, using or not the date on which the transfer was created .
