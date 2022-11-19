@@ -41,11 +41,16 @@ services:
     image: postgres
     container_name: db
     platform: linux/x86_64
+    user: postgres
     ports:
       - 5432:5432
     environment:
-      - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=123456
     restart: 'always'
+    healthcheck:
+      test: ["CMD", "pg_isready", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     cap_add:
       - SYS_NICE
