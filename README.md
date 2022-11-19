@@ -31,7 +31,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## How to use
 
-###  You will need to click in "sign up" at main page.
+###  You will need to click in "sign up" at home page.
 
 ###  "username" will require at least 3 characters.
 
