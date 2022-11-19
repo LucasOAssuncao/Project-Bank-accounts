@@ -15,6 +15,10 @@
 git clone git@github.com:LucasOAssuncao/Project-NG.git
 ```
 
+```bash
+cd Project-NG
+```
+
 ### Install dependencies:
 
 #### With Docker:
