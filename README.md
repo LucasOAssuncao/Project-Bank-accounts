@@ -33,9 +33,9 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You will need to click in "sign up" at main page.
 
-username will require at least 3 characters.
+"username" will require at least 3 characters.
 
-password will require at least 8 characters, at least 1 uppercase, and 1 number.
+"password" will require at least 8 characters, at least 1 uppercase, and 1 number.
 
 After you signed you will be redirected to /login, i recommend you to create another account for full test of the aplication.
 
