@@ -30,12 +30,6 @@ docker-compose up --build
 npm install
 ```
 
-or
-
-```bash
-npm install
-```
-
 ### Run server
 
 ```bash
