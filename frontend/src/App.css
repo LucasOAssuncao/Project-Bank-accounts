@@ -53,7 +53,7 @@ body {
 
 .lg-card {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  background-color: rgba(226, 225, 225, 0.917);
+  background-color: rgba(226, 225, 225, 0.292);
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(4px);
 }

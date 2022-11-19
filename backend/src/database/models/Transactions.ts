@@ -1,4 +1,4 @@
-import { INTEGER, STRING, Model, DATEONLY } from 'sequelize';
+import { INTEGER, STRING, Model, DATEONLY, DECIMAL } from 'sequelize';
 import db from '.';
 import Accounts from './Accounts';
 
@@ -25,7 +25,7 @@ Transactions.init({
     allowNull: false,
   },
   value: {
-    type: INTEGER,
+    type: DECIMAL,
     allowNull: false,
   },
   createdAt: {

@@ -28,8 +28,8 @@ export default class UserController {
         .status(401)
         .json({ message: 'You cannot cash-out to yourself' });
     }
-
-    if (value > balance) {
+    
+    if (Number(value) > Number(balance)) {
       return res.status(401).json({ message: 'Insufficient funds' });
     }
 

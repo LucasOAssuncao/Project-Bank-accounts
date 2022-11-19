@@ -83,18 +83,43 @@ function Home() {
   };
 
   return (
-    <div>
+    <div className='flex'>
       {token && (
         <div>
-          <header>
-            <h3>Olá {user.userName}</h3>
+          <header className='flex justify-end gap-8 bg-gray-800 text-white p-[5px] w-[100vw]'>
+            <h3>Hello {user.userName}</h3>
             <h3>Balance: {user.balance}</h3>
-            <button type='button' onClick={() => logout()}>
+            <button
+              className='bg-white text-black p-[2px] w-[80px] rounded hover:bg-gray-400'
+              type='button'
+              onClick={() => logout()}
+            >
               Logout
             </button>
           </header>
-          <div>
-            <h2>Transactions</h2>
+          <section className='flex m-auto self-center bg-gray-300 flex-col items-center gap-4 p-10 pt-5 w-[100vw] lg-card'>
+            <h2 className='text-[25px] sign'>Cash Out</h2>
+            <div className='flex gap-5'>
+              <label className='text-[20px] sign'>To:</label>
+              <input
+                className='input input-bordered input-sm text-center '
+                type='text'
+                onChange={({ target: { value } }) => setReceiver(value)}
+              />
+              <label className='text-[20px] sign'>Value:</label>
+              <input
+                className='input input-bordered input-sm text-center'
+                type='text'
+                onChange={({ target: { value } }) => setQty(value)}
+              />
+              <button className='bg-black text-white p-[2px] w-[80px] rounded hover:bg-gray-400' type='button' onClick={() => handleClick()}>
+                Confirm
+              </button>
+            </div>
+          </section>
+          <div className='flex flex-col items-center gap-2 bg-gray-800 text-white p-[5px] w-[100vw]'>
+            <h2 className='text-[25px] sign'>Transactions</h2>
+            <div className='flex gap-6'>
             <label htmlFor='in'>
               <input
                 type='radio'
@@ -115,39 +140,23 @@ function Home() {
               Out
             </label>
             <input
+              className='input input-bordered input-sm text-center h-[25px] w-[10vw]'
               type='text'
               placeholder='YYYY/MM/DD'
               onChange={({ target: { value } }) => setDate(value)}
             />
+            </div>
           </div>
-          <section>
-            <h2>Cash Out</h2>
-            <label>
-              To:
-              <input
-                type='text'
-                onChange={({ target: { value } }) => setReceiver(value)}
-              />
-            </label>
-            <label>
-              Value:
-              <input
-                type='text'
-                onChange={({ target: { value } }) => setQty(value)}
-              />
-            </label>
-            <button type='button' onClick={() => handleClick()}>
-              Confirm
-            </button>
-          </section>
+          <div className='lg-card flex flex-wrap justify-center gap-10 p-10 pt-5 w-[100vw]'>
           {transactions.length &&
             transactions.map((transaction: any, index: number) => (
-              <div key={index}>
+              <div className='flex flex-col gap-1 text-start text-[18px] w-[20%]' key={index}>
                 <h3>Created at: {transaction.createdAt}</h3>
                 <h3>Credited accountId: {transaction.creditedAccountId}</h3>
                 <h3>Value: {transaction.value}</h3>
               </div>
             ))}
+            </div>
         </div>
       )}
     </div>

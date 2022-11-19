@@ -5,7 +5,7 @@ export default class AccountsService {
   insert = async () => {
     const {
       dataValues: { id },
-    } = await Accounts.create({ balance: 100.0 });
+    } = await Accounts.create({ balance: 100.00 });
 
     return id;
   };

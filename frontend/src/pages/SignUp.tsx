@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import axios from "axios";
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 function SignUp() {
+  const history = useHistory()
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
 
@@ -12,7 +13,8 @@ function SignUp() {
         userName: user,
         password: password,
       })
-      .then((_response) => alert('Usuario Cadastrado com Sucesso!'))
+      .then((_response) => {alert('Usuario Cadastrado com Sucesso!')
+      history.push('/');})
       .catch((err) => {
         alert(err.response.data.message);
       });
