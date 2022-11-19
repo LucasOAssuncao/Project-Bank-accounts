@@ -27,7 +27,7 @@ docker-compose up --build
 #### Without Docker:
 
 ```bash
-yarn install
+npm install
 ```
 
 or
