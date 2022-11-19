@@ -23,23 +23,27 @@ function Login() {
   };
 
   return (
-    <div>
-      <input
-        type='text'
-        placeholder='User'
-        onChange={({ target: { value } }) => setUser(value)}
-      />
-      <input
-        type='text'
-        placeholder='Password'
-        onChange={({ target: { value } }) => setPassword(value)}
-      />
-      <button type='button' onClick={() => handleClick()}>
-        Buscar
-      </button>
-      <Link to='/signup'>
-        <p>Sign up</p>
-      </Link>
+    <div className='flex items-center justify-center'>
+      <div className='flex flex-col mt-[15%] justify-center items-center rounded gap-4 p-[40px] lg-card'>
+          <input
+            className="input input-bordered input-sm text-center"
+            type='text'
+            placeholder='User'
+            onChange={({ target: { value } }) => setUser(value)}
+          />
+          <input
+            className="input input-bordered input-sm text-center"
+            type='password'
+            placeholder='Password'
+            onChange={({ target: { value } }) => setPassword(value)}
+          />
+          <button className="button-log" type='button' onClick={() => handleClick()}>
+            Login
+          </button>
+          <Link className="underline text-blue-800 text-[12px] sign" to='/signup'>
+            <p>Sign up</p>
+          </Link>
+      </div>
     </div>
   );
 }

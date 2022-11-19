@@ -20,23 +20,27 @@ function SignUp() {
 
 
   return (
-    <div>
+    <div className='flex items-center justify-center'>
+      <div className='flex flex-col mt-[15%] justify-center items-center rounded gap-4 p-[40px] lg-card'>
       <input
+        className="input input-bordered input-sm text-center"
         type='text'
         placeholder='User'
         onChange={({ target: { value } }) => setUser(value)}
       />
       <input
-        type='text'
+        className="input input-bordered input-sm text-center"
+        type='password'
         placeholder='Password'
         onChange={({ target: { value } }) => setPassword(value)}
       />
-      <button type='button' onClick={() => handleClick()}>
-        Buscar
+      <button className="button-log" type='button' onClick={() => handleClick()}>
+        Sign up
       </button>
-      <Link to='/login'>
+      <Link className="underline text-blue-800 text-[12px] sign" to='/login'>
         <p>Login</p>
       </Link>
+      </div>
     </div>
   );
 }
